@@ -27,6 +27,7 @@ Proyek ini dikerjakan melalui beberapa tahapan utama:
 3. **Query & Analysis:** Each business questions(KPIs) answered with write the Query SQL Specifically use Clause `WHERE` to filtering, `GROUP BY` to Aggregation and functions like `COUNT(DISTINCT ...)`, `AVG()`, AND `MONTHNAME()`.
 
 ## Query Key
+```sql
 -- 1. Counting the total unique transactions per Jan - April 2025
 SELECT
     COUNT(DISTINCT TransactionID) AS Total_Transaction
