@@ -20,7 +20,7 @@ This project demonstrate the ability of data end-to-end with replication previou
 * **SQL Client:** Visual Studio Code (VS Code)
 * **Data Visualization:** Microsoft Excel (PivotTables & PivotCharts)
 
-## Proses Kerja
+## Process
 Proyek ini dikerjakan melalui beberapa tahapan utama:
 1. **Data Preparation:** Imported Dataset CSV with -200.000 rows into MySQL Database use command `LOAD DATA LOCAL INFILE` to handling data raw.
 2. **Data Transforming:** Function `STR_TO_DATE()` used in process import to ensuring format date its right and already to analyzed.
