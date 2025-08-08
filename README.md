@@ -17,11 +17,83 @@ This project demonstrate the ability of data end-to-end with replication previou
 
 ## Tools
 * **Database:** MySQL (via Xampp)
+* **SQL Client:** Visual Studio Code (VS Code)
+* **Data Visualization:** Microsoft Excel (PivotTables & PivotCharts)
 
-## Project Insight
-- weekly sales norms between 11.500 transactions indicating market stability.
-- The highest monthly sales performance was in March which was close to 51000 transactions and the lowest was in February at 46000 transactions.
-- The highest sales driving product is Cereal and the second is Ice Cream.
+## Proses Kerja
+Proyek ini dikerjakan melalui beberapa tahapan utama:
+1. **Data Preparation:** Imported Dataset CSV with -200.000 rows into MySQL Database use command `LOAD DATA LOCAL INFILE` to handling data raw.
+2. **Data Transforming:** Function `STR_TO_DATE()` used in process import to ensuring format date its right and already to analyzed.
+3. **Query & Analysis:** Each business questions(KPIs) answered with write the Query SQL Specifically use Clause `WHERE` to filtering, `GROUP BY` to Aggregation and functions like `COUNT(DISTINCT ...)`, `AVG()`, AND `MONTHNAME()`.
 
-## Final Conclusion
-To improve the sales of Supermarket Dailymart, from the basket market analysis, the markting strategic plan focuses on the most sold products. Make a bundling promo of Cereal and Ice cream prodcut or make another bundling of top 10 product sold, do a sales strategy to put products that sell less side by side with the most sold so that buyers are interested in buying them. This demographic represents stable weekly sales performance and less stable monthly performance. conducting a special campaign in feb to counteract the seasonal downward trend will stabilize monthly sales.
+## Query Key
+-- 1. Counting the total unique transactions per Jan - April 2025
+SELECT
+    COUNT(DISTINCT TransactionID) AS Total_Transaction
+FROM
+    transactions;
+
+-- 2. displaying the total unique Customers per Jan - April 2025
+SELECT 
+    COUNT(DISTINCT `CustomerID`) AS Total_Unique_Customer
+FROM
+    transactions;
+
+-- 3. Displaying the total product sold per Jan - April 2025 
+SELECT
+    COUNT(`Products`) AS Total_Product_Sales
+from 
+    transactions;
+
+-- 4. Counting Average item/product purchased by customers
+Select 
+    Round(COUNT(`TransactionID`) / COUNT(DISTINCT `TransactionID`), 3) AS Avg_Basket_Size
+from 
+    transactions;
+ 
+-- 5. Displaying the total unique product
+SELECT
+    COUNT(DISTINCT `Products`) AS Total_Product
+FROM 
+    transactions;
+
+-- 6. Counting average weekly product sales
+WITH Sales_week AS (
+    SELECT 
+        YEARWEEK(Timestamp) AS Minggu,
+        Count(TransactionID) AS Transaksi
+    FROM 
+        transactions
+    GROUP BY
+        Minggu
+)
+SELECT 
+    ROUND(AVG(Transaksi), 2) AS Rata_Rata_Transaksi
+FROM
+    `Sales_week`;
+
+-- 7. Displaying the month biggest sales
+SELECT
+    MONTHNAME(Timestamp) AS Bulan,
+    COUNT(TransactionID) AS Transaksi
+FROM
+    transactions
+WHERE
+    'Timestamp' IS NOT NULL AND 'Timestamp' > '0000-00-00'
+GROUP BY
+    Bulan
+ORDER BY
+    Transaksi DESC
+    LIMIT 1; 
+
+-- 8. Displaying the most sold product
+SELECT 
+    `Products`,
+    COUNT(TransactionID) AS Transaksi
+FROM
+    transactions
+GROUP BY 
+    `Products`
+ORDER BY
+    Transaksi DESC
+    LIMIT 5 OFFSET 0;
