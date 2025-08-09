@@ -26,6 +26,9 @@ Proyek ini dikerjakan melalui beberapa tahapan utama:
 2. **Data Transforming:** Function `STR_TO_DATE()` used in process import to ensuring format date its right and already to analyzed.
 3. **Query & Analysis:** Each business questions(KPIs) answered with write the Query SQL Specifically use Clause `WHERE` to filtering, `GROUP BY` to Aggregation and functions like `COUNT(DISTINCT ...)`, `AVG()`, and `MONTHNAME()`.
 
+## Dashboard
+<img width="1830" height="1062" alt="Dashboard Dailymart" src="https://github.com/user-attachments/assets/c2f4352e-5045-42a3-857f-b63cee62f284" />
+
 ## Query Key
 ```sql
 -- 1. Counting the total unique transactions per Jan - April 2025
